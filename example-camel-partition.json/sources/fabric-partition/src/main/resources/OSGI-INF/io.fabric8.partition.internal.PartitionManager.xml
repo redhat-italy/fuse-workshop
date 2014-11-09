@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component name="io.fabric8.partition" configuration-policy="require" activate="activate" deactivate="deactivate">
+        <implementation class="io.fabric8.partition.internal.PartitionManager"/>
+        <property name="id"/>
+        <property name="workItemRepositoryFactory.target"/>
+        <property name="workItemPath"/>
+        <property name="balancingPolicy.target"/>
+        <property name="worker.target"/>
+        <property name="name" value="${karaf.name}"/>
+        <property name="service.pid" value="io.fabric8.partition"/>
+        <reference name="configurer" interface="io.fabric8.api.scr.Configurer" cardinality="1..1" policy="static" bind="bindConfigurer" unbind="unbindConfigurer"/>
+        <reference name="balancingPolicy" interface="io.fabric8.partition.BalancingPolicy" cardinality="1..1" policy="static" bind="bindBalancingPolicy" unbind="unbindBalancingPolicy"/>
+        <reference name="worker" interface="io.fabric8.partition.Worker" cardinality="1..1" policy="static" bind="bindWorker" unbind="unbindWorker"/>
+        <reference name="workItemRepositoryFactory" interface="io.fabric8.partition.WorkItemRepositoryFactory" cardinality="1..1" policy="static" bind="bindWorkItemRepositoryFactory" unbind="unbindWorkItemRepositoryFactory"/>
+        <reference name="curator" interface="org.apache.curator.framework.CuratorFramework" cardinality="1..1" policy="static" bind="bindCurator" unbind="unbindCurator"/>
+    </scr:component>
+</components>

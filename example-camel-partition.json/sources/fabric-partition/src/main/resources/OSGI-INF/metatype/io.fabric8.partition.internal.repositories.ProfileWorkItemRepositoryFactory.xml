@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+    <OCD id="io.fabric8.partition.repository.profile" name="Fabric8 Profile Work Item WorkItemRepository" description="%io.fabric8.partition.repository.profile.description">
+        <AD id="type" type="String" default="profile" name="%type.name" description="%type.description"/>
+    </OCD>
+    <Designate pid="io.fabric8.partition.repository.profile">
+        <Object ocdref="io.fabric8.partition.repository.profile"/>
+    </Designate>
+</metatype:MetaData>

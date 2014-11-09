@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component immediate="true" name="io.fabric8.partition.worker.logging" activate="activate" deactivate="deactivate">
+        <implementation class="io.fabric8.partition.internal.LoggingWorker"/>
+        <service servicefactory="false">
+            <provide interface="io.fabric8.partition.Worker"/>
+        </service>
+        <property name="type" value="logging"/>
+        <property name="service.pid" value="io.fabric8.partition.worker.logging"/>
+    </scr:component>
+</components>

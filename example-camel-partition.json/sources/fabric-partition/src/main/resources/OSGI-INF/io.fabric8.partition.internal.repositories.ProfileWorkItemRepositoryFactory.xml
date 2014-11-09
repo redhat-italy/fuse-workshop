@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component name="io.fabric8.partition.repository.profile" activate="activate" deactivate="deactivate">
+        <implementation class="io.fabric8.partition.internal.repositories.ProfileWorkItemRepositoryFactory"/>
+        <service servicefactory="false">
+            <provide interface="io.fabric8.partition.WorkItemRepositoryFactory"/>
+        </service>
+        <property name="type" value="profile"/>
+        <property name="name" value="${karaf.name}"/>
+        <property name="service.pid" value="io.fabric8.partition.repository.profile"/>
+        <reference name="configurer" interface="io.fabric8.api.scr.Configurer" cardinality="1..1" policy="static" bind="bindConfigurer" unbind="unbindConfigurer"/>
+        <reference name="dataStore" interface="io.fabric8.api.DataStore" cardinality="1..1" policy="static" target="(type=caching-git)" bind="bindDataStore" unbind="unbindDataStore"/>
+        <reference name="fabricService" interface="io.fabric8.api.FabricService" cardinality="1..1" policy="static" bind="bindFabricService" unbind="unbindFabricService"/>
+        <reference name="urlHandler" interface="org.osgi.service.url.URLStreamHandlerService" cardinality="1..1" policy="static" target="url.handler.protocol=profile" bind="bindUrlHandler" unbind="unbindUrlHandler"/>
+    </scr:component>
+</components>

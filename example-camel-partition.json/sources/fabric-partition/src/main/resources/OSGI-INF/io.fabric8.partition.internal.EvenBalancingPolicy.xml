@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component immediate="true" name="io.fabric8.partition.balancing.even" activate="activate" deactivate="deactivate">
+        <implementation class="io.fabric8.partition.internal.EvenBalancingPolicy"/>
+        <service servicefactory="false">
+            <provide interface="io.fabric8.partition.BalancingPolicy"/>
+        </service>
+        <property name="type" value="even"/>
+        <property name="service.pid" value="io.fabric8.partition.balancing.even"/>
+        <reference name="curator" interface="org.apache.curator.framework.CuratorFramework" cardinality="1..1" policy="static" bind="bindCurator" unbind="unbindCurator"/>
+    </scr:component>
+</components>

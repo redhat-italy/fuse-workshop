@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component name="io.fabric8.partition.worker.profile" deactivate="deactivate">
+        <implementation class="io.fabric8.partition.internal.profile.ProfileTemplateWorker"/>
+        <service servicefactory="false">
+            <provide interface="io.fabric8.partition.Worker"/>
+        </service>
+        <property name="type" value="profile-template"/>
+        <property name="name" value="${karaf.name}"/>
+        <property name="service.pid" value="io.fabric8.partition.worker.profile"/>
+        <reference name="configurer" interface="io.fabric8.api.scr.Configurer" cardinality="1..1" policy="static" bind="bindConfigurer" unbind="unbindConfigurer"/>
+        <reference name="fabricService" interface="io.fabric8.api.FabricService" cardinality="1..1" policy="static" bind="bindFabricService" unbind="unbindFabricService"/>
+        <reference name="lockService" interface="io.fabric8.api.locks.LockService" cardinality="1..1" policy="static" bind="bindLockService" unbind="unbindLockService"/>
+    </scr:component>
+</components>

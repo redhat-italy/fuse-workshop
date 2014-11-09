@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+    <OCD id="io.fabric8.partition" name="Fabric8 Work Manager Factory" description="%io.fabric8.partition.description">
+        <AD id="id" type="String" name="Task ID" description="A unique identifier for the task"/>
+        <AD id="workItemRepositoryFactory.target" type="String" name="Repository Factory Filter" description="Ldap filter for repository factory. Factory defines where and how the work items will be read"/>
+        <AD id="workItemPath" type="String" name="Work Item Path" description="The path where the work items are located"/>
+        <AD id="balancingPolicy.target" type="String" name="Policy Filter" description="Ldap filter for the balancing Policy. Balancing Policy defines how the work items will be distributed"/>
+        <AD id="worker.target" type="String" name="Worker Filter" description="Ldap filter for the Worker to use. Worker defines how each item will be processed"/>
+    </OCD>
+    <Designate pid="io.fabric8.partition" factoryPid="io.fabric8.partition">
+        <Object ocdref="io.fabric8.partition"/>
+    </Designate>
+</metatype:MetaData>
