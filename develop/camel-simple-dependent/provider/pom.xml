@@ -29,7 +29,7 @@
 
   <groupId>it.redhat.quickstart.fuse</groupId>
   <artifactId>provider</artifactId>
-  <version>1.0.3</version>
+  <version>1.2.0</version>
   <packaging>bundle</packaging>
   <name>Simple Dependency Provider</name>
 
@@ -43,7 +43,7 @@
     <!-- maven-compiler-plugin -->
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
-    <api.version>1.0.0</api.version>
+    <api.version>1.2.0</api.version>
   </properties>
 
   <dependencies>
