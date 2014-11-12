@@ -25,13 +25,29 @@
 -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xsi:schemaLocation="
+            http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+            http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd">
 
-  <reference id="greeter" interface="it.redhat.quickstarts.fuse.api.Greeter" />
+  <cm:property-placeholder id="myConfig" persistent-id="io.fabric8.master.example" update-strategy="reload" />
 
-  <bean class="it.redhat.quickstarts.fuse.consumer.Hello" scope="singleton"
-        init-method="init" destroy-method="stop">
-    <property name="greeter" ref="greeter" />
-  </bean>
+  <bean id="greeter" class="it.redhat.quickstarts.fabric.service.Greeter"/>
+
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <propertyPlaceholder id="properties" location="blueprint:myConfig" prefixToken="{{" suffixToken="}}"/>
+
+    <route id="service-hello">
+      <from uri="master:greeterService:jetty:http://0.0.0.0:{{greeterPort}}/greeter"/>
+      <convertBodyTo type="java.lang.String" />
+      <log message="Received message [${body}]" />
+      <to uri="bean:greeter?method=greet"/>
+      <log message="Response [${body}]" />
+      <setBody>
+        <simple>${body}, from ${sys.karaf.name}</simple>
+      </setBody>
+    </route>
+  </camelContext>
 
 </blueprint>
